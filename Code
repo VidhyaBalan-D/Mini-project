@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surplux - Create Account</title>
+<style>
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+color:white;
+}
+.container{
+position:relative;
+width:100vw;
+height:100vh;
+}
+.container img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+.glass{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background: rgba(0,0,0,0.4);
+backdrop-filter: blur(8px);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+.form-box{
+background:rgba(0,0,0,0.7);
+padding:40px;
+border-radius:12px;
+width:350px;
+}
+h1{
+text-align:center;
+margin-bottom:25px;
+color:#00e6e6;
+}
+label{
+display:block;
+margin-top:15px;
+}
+input{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:none;
+border-radius:6px;
+}
+button{
+width:100%;
+padding:12px;
+margin-top:20px;
+border:none;
+border-radius:6px;
+background:#00e6e6;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+button:hover{
+background:#00b3b3;
+}
+#strength{
+margin-top:10px;
+font-weight:bold;
+}
+#error{
+color:red;
+text-align:center;
+}
+.rules{
+font-size:13px;
+margin-top:8px;
+color:#ccc;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<img src="project 2 img.jpg">
+<div class="glass">
+<div class="form-box">
+<h1>Surplux</h1>
+<form onsubmit="return validateForm()">
+<label>Username</label>
+<input type="text" required>
+<label>Create Email</label>
+<input type="email" required>
+<label>Password</label>
+<input type="password" id="password" onkeyup="checkStrength()" required>
+<div id="strength"></div>
+<div class="rules">
+• At least 8 characters<br>
+• Uppercase letter<br>
+• Lowercase letter<br>
+• Number<br>
+• Special character
+</div>
+<label>Confirm Password</label>
+<input type="password" id="confirmPassword" required>
+<button type="submit">Create Account</button>
+<p id="error"></p>
+</form>
+</div>
+</div>
+</div>
+<script>
+function checkStrength(){
+let password=document.getElementById("password").value;
+let strength=document.getElementById("strength");
+let score=0;
+if(password.length>=8) score++;
+if(/[A-Z]/.test(password)) score++;
+if(/[a-z]/.test(password)) score++;
+if(/[0-9]/.test(password)) score++;
+if(/[^A-Za-z0-9]/.test(password)) score++;
+if(score<=2){
+strength.innerHTML="Weak Password 😟";
+strength.style.color="red";
+}
+else if(score==3 || score==4){
+strength.innerHTML="Medium Password 🙂";
+strength.style.color="orange";
+}
+else if(score==5){
+strength.innerHTML="Strong Password 😎";
+strength.style.color="lightgreen";
+}
+}
+function validateForm(){
+let password=document.getElementById("password").value;
+let confirm=document.getElementById("confirmPassword").value;
+if(password!==confirm){
+document.getElementById("error").innerText="Passwords do not match!";
+return false;
+}
+alert("Account Created Successfully in Surplux 🎬");
+return true;
+}
+</script>
+</body>
+</html>
